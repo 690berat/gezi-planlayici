@@ -2,7 +2,7 @@
 Gezi Planlayıcı, gezilecek yerleri, ziyaret saatlerini ve notları tek bir günlük planda toplar. Seyahat bilgilerini farklı yerlerde tutmak yerine düzenli bir rota oluşturmak isteyen öğrenciler ve bireysel gezginler için geliştirilmiştir. Kullanıcı şehir ve tarih aralığıyla gezi oluşturur; günlere durak ekler, kayıtlarını düzenler veya siler.
 
 ## İş Takip Panosu
-**Panoya erişim:** GitHub Projects pano bağlantısı buraya eklenecektir.
+**Panoya erişim:** [Gezi Planlayıcı — Geliştirme Panosu](https://github.com/users/690berat/projects/1/views/1)
 
 Geliştirme görevleri **Yapılacak**, **Devam Ediyor** ve **Tamamlandı** sütunlarında takip edilir. Kartlarda görev açıklaması, kabul kriterleri ve ilgili commit/PR bağlantıları yer alır.
 
