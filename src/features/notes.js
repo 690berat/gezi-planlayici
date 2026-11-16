@@ -1,4 +1,4 @@
-// Not güncelleme kuralı hazır; form ve kalıcı kayıt bağlantısı sonraki aşama.
+// Genel gezi notu kuralları; TripNote formu üzerinden localStorage kaydına bağlanır.
 export const MAX_TRIP_NOTE_LENGTH=2000;
 export function updateTripNote(trip,note){
  if(typeof note!=='string')throw new Error('Not metin olmalıdır.');

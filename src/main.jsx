@@ -2,6 +2,8 @@ import React,{useState} from 'react';
 import{createRoot}from'react-dom/client';
 import{datesBetween,validateTrip,validateStop,sceneFor,tripStatus}from'./domain';
 import Scene from'./scenes';
+import TripNote from'./features/TripNote.jsx';
+import{updateTripNote}from'./features/notes.js';
 import{selectTrips}from'./features/search.js';
 import'./style.css';
 const KEY='gezi-planlayici-v1';
@@ -76,6 +78,7 @@ function App(){
     if(!window.confirm('“'+stop.place+'” durağını silmek istediğine emin misin?'))return;
     if(save(trips.map(t=>t.id===trip.id?{...t,stops:t.stops.filter(s=>s.id!==stop.id)}:t))){if(editingStop?.id===stop.id)setEditingStop(null);setError('');setNotice('Durak silindi.')}
   }
+  function saveGeneralNote(note){try{return save(trips.map(t=>t.id===trip.id?updateTripNote(t,note):t))}catch(e){setError(e.message);return false}}
   const stops=trip?trip.stops.filter(s=>s.date===activeDay).sort((a,b)=>a.time.localeCompare(b.time)):[];
   return<div className="app">
     <section className="hero">
@@ -118,6 +121,7 @@ function App(){
             </form>
           </section>
         </div>
+        <TripNote key={trip.id} trip={trip} onSave={saveGeneralNote}/>
       </section>}
       {error&&!modal&&!trip&&<p role="alert" className="error">{error}</p>}
       <section aria-labelledby="ideas-title" className="ideas-sec">

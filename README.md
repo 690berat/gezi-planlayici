@@ -70,6 +70,11 @@ Uygulamayı tarayıcının geliştirici araçlarında mobil ekran görünümüyl
 
 **Beklenen:** Arama büyük/küçük harften bağımsızdır ve durum filtresiyle birlikte çalışır. Eşleşme yoksa açıklayıcı mesaj gösterilir. **Filtreleri temizle** veya **Tüm gezileri göster** ile tüm kartlar geri gelir. Filtreye uymayan seçili gezinin detay planı da gizlenir; geziler silinmez.
 
+### 11. Geziye genel not ekleme
+Bir gezi açın. Planın altındaki **Gezi notların** alanına `Yanıma şarj aleti alacağım.` yazıp **Notu kaydet** seçin. Notu değiştirip yeniden kaydedin, ardından sayfayı yenileyin. Başka bir gezi açarak notların birbirinden bağımsız olduğunu kontrol edin. **Temizle** işleminde önce iptal edin, sonra onaylayıp sayfayı yenileyin.
+
+**Beklenen:** Kaydedilen not yenilemeden sonra korunur; diğer geziler etkilenmez. Temizleme iptalinde not değişmez, onayında yalnızca ilgili gezinin genel notu silinir; gezi ve duraklar korunur. Alan en fazla 2000 karakter kabul eder.
+
 ## Kontroller
 Otomatik kontroller için `npm test`, üretim derlemesi için `npm run build` çalıştırın. Derleme `dist` klasörüne yazılır; `npm run preview` ile yerel olarak incelenebilir. Otomatik kontroller iş kurallarını kapsar; yukarıdaki arayüz senaryoları ayrıca elle doğrulanmalıdır.
 
@@ -79,4 +84,4 @@ Bütçe hesaplama, PDF indirme, harita, yedekleme, durak kategorileri ve ziyaret
 **Geliştirici:** Berat Kolsuzoğlu · Güncel Yazılım Geliştirme Süreçleri ve DevOps bireysel projesi.
 
 ## Devam eden çalışmalar
-Arama/filtreleme özelliği arayüze bağlanmıştır. Bütçe, PDF ve genel gezi notu için ilk iş kuralları ile otomatik testler hazırlanmıştır; bu üç modül henüz arayüze bağlı değildir. Başlanan ve kalan işler: [geliştirme durumu](docs/devam-eden-calismalar.md).
+Arama/filtreleme ve genel gezi notu özellikleri arayüze bağlanmıştır. Bütçe ve PDF için ilk iş kuralları ile otomatik testler hazırlanmıştır; bu iki modül henüz arayüze bağlı değildir. Başlanan ve kalan işler: [geliştirme durumu](docs/devam-eden-calismalar.md).

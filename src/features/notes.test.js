@@ -1,3 +1,6 @@
 import{test}from'node:test';import assert from'node:assert/strict';import{updateTripNote}from'./notes.js';
 test('not güncelleme ve temizleme geziyi ve durakları korur',()=>{const t={id:1,stops:[{id:'a'}]};const next=updateTripNote(t,' Bilet al ');assert.equal(next.generalNote,'Bilet al');assert.deepEqual(next.stops,t.stops);assert.equal(t.generalNote,undefined);assert.equal(updateTripNote(next,'').generalNote,'')});
 test('aşırı uzun not reddedilir',()=>assert.throws(()=>updateTripNote({},'a'.repeat(2001))));
+
+test('genel not yalnızca seçilen geziyi değiştirir, JSON kaydında korunur',()=>{const trips=[{id:1,stops:[{id:'x'}]},{id:2,generalNote:'Diğer not',stops:[]}];const next=trips.map(t=>t.id===1?updateTripNote(t,'Şarj aleti al'):t);const restored=JSON.parse(JSON.stringify(next));assert.equal(restored[0].generalNote,'Şarj aleti al');assert.equal(restored[1].generalNote,'Diğer not');assert.deepEqual(restored[0].stops,trips[0].stops);assert.equal(trips[0].generalNote,undefined)});
+test('2000 karakter kabul edilir, temizlenmiş not geri gelmez',()=>{const t=updateTripNote({id:1,stops:[]},'a'.repeat(2000));assert.equal(t.generalNote.length,2000);const cleared=JSON.parse(JSON.stringify(updateTripNote(t,'')));assert.equal(cleared.generalNote,'');assert.equal(cleared.id,1)});
