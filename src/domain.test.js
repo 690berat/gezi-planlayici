@@ -1,0 +1,12 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{datesBetween,validateTrip,validateStop}from'./domain.js';
+const trip={name:'Urfa',city:'Şanlıurfa',start:'2026-12-05',end:'2026-12-07'};
+test('tarih aralığı başlangıç ve bitişi içerir',()=>assert.deepEqual(datesBetween(trip.start,trip.end),['2026-12-05','2026-12-06','2026-12-07']));
+test('geçerli gezi kabul edilir',()=>assert.equal(validateTrip(trip),''));
+test('ters tarih reddedilir',()=>assert.ok(validateTrip({...trip,end:'2026-12-04'})));
+test('boş ad reddedilir',()=>assert.ok(validateTrip({...trip,name:'  '})));
+test('60 günden uzun gezi reddedilir',()=>assert.ok(validateTrip({...trip,end:'2027-03-01'})));
+test('gezi dışındaki güne durak eklenemez',()=>assert.ok(validateStop(trip,{place:'Balıklıgöl',time:'10:00',date:'2026-12-08'})));
+test('geçerli durak kabul edilir',()=>assert.equal(validateStop(trip,{place:'Balıklıgöl',time:'10:00',date:trip.start}),''));
+import{sceneFor,tripStatus}from'./domain.js';
+test('şehre uygun sahne seçilir',()=>{assert.equal(sceneFor('Şanlıurfa'),'tarih');assert.equal(sceneFor('Ürgüp'),'kapadokya');assert.equal(sceneFor('ANTALYA'),'sahil')});
+test('gezi durumu hesaplanır',()=>{assert.equal(tripStatus(trip,'2026-12-04'),'Yarın başlıyor');assert.equal(tripStatus(trip,'2026-12-06'),'Şu an yolda');assert.equal(tripStatus(trip,'2026-12-09'),'Tamamlandı')});
