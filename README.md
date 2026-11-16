@@ -72,3 +72,6 @@ Otomatik kontroller için `npm test`, üretim derlemesi için `npm run build` ç
 Bütçe hesaplama, PDF indirme, arama/filtreleme, harita, yedekleme, durak kategorileri ve ziyaret edildi işaretleme sonraki geliştirmeler olarak planlanmıştır; mevcut sürümde bulunmaz.
 
 **Geliştirici:** Berat Kolsuzoğlu · Güncel Yazılım Geliştirme Süreçleri ve DevOps bireysel projesi.
+
+## Devam eden çalışmalar
+Bütçe, arama/filtreleme, PDF ve genel gezi notu için ilk iş kuralları ile otomatik testler hazırlanmıştır. Bu modüller henüz arayüze bağlı değildir. Başlanan ve kalan işler: [geliştirme durumu](docs/devam-eden-calismalar.md).
