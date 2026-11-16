@@ -1,4 +1,4 @@
-// Arama/filtreleme kuralları hazır; arayüz bağlantısı sonraki aşama.
+// Gezi arama ve durum filtreleme kuralları; arayüzde birlikte kullanılır.
 const normalize=value=>String(value??'').toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i').trim();
 export function selectTrips(trips,{query='',status='all',today}={}){
  if(!['all','upcoming','ongoing','completed'].includes(status))throw new Error('Geçersiz durum filtresi.');

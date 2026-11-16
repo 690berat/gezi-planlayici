@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import{createRoot}from'react-dom/client';
 import{datesBetween,validateTrip,validateStop,sceneFor,tripStatus}from'./domain';
 import Scene from'./scenes';
+import{selectTrips}from'./features/search.js';
 import'./style.css';
 const KEY='gezi-planlayici-v1';
 const DATE=/^\d{4}-\d{2}-\d{2}$/;
@@ -32,6 +33,9 @@ function Pass({t,on,select,edit,remove}){
 }
 function App(){
   const[trips,setTrips]=useState(read);
+  const[query,setQuery]=useState('');
+  const[statusFilter,setStatusFilter]=useState('all');
+  const filteredTrips=selectTrips(trips,{query,status:statusFilter,today:today()});
   const[selected,setSelected]=useState(()=>trips[0]?.id);
   const[modal,setModal]=useState(false);
   const[prefill,setPrefill]=useState({});
@@ -53,7 +57,7 @@ function App(){
     if(existing?.stops.some(s=>s.date<f.start||s.date>f.end)){setError('Yeni tarih aralığı mevcut durakların tarihlerini de içermelidir. Durakların kaybolmaması için tarih aralığını genişletiniz.');return}
     const t=existing?{...existing,...f}:{...f,id:crypto.randomUUID(),stops:[]};
     const next=existing?trips.map(x=>x.id===t.id?t:x):[...trips,t];
-    if(save(next)){setEditingStop(null);setSelected(t.id);setDay(t.start);setModal(false);setError('');setNotice(existing?'Gezi bilgilerin güncellendi.':'Gezin oluşturuldu. Şimdi ilk durağını ekleyebilirsin.')}
+    if(save(next)){setQuery('');setStatusFilter('all');setEditingStop(null);setSelected(t.id);setDay(t.start);setModal(false);setError('');setNotice(existing?'Gezi bilgilerin güncellendi.':'Gezin oluşturuldu. Şimdi ilk durağını ekleyebilirsin.')}
   }
   function deleteTrip(t){
     if(!window.confirm('“'+t.name+'” gezisini ve bu geziye ait tüm durakları silmek istediğine emin misin?'))return;
@@ -87,10 +91,11 @@ function App(){
       <div role="status" className="notice">{notice}</div>
       <section aria-labelledby="trips-title">
         <div className="sec-head"><div><span className="eyebrow">SANA AİT YOLCULUKLAR</span><h2 id="trips-title">Gezilerim <span className="count">{trips.length}</span></h2><p>{trips.length?'Planını açmak için bir gezi kartına dokun.':'Bir sonraki yolculuğuna burada yer aç.'}</p></div><button className="btn dark small" onClick={()=>openModal()}>＋ Gezi ekle</button></div>
-        {trips.length?<div className="passes">{trips.map(t=><Pass key={t.id} t={t} on={t.id===selected} select={()=>pick(t)} edit={()=>openModal(t)} remove={()=>deleteTrip(t)}/>)}</div>
+        {trips.length>0&&<div className="trip-filters"><div className="trip-search"><label htmlFor="trip-query">Gezi veya şehir ara</label><input id="trip-query" type="search" value={query} onChange={e=>{setQuery(e.target.value);setEditingStop(null)}} placeholder="Gezi adı veya şehir giriniz" maxLength={100}/></div><div className="trip-status"><label htmlFor="trip-status">Gezi durumu</label><select id="trip-status" value={statusFilter} onChange={e=>{setStatusFilter(e.target.value);setEditingStop(null)}}><option value="all">Tüm geziler</option><option value="upcoming">Yaklaşan</option><option value="ongoing">Devam eden</option><option value="completed">Tamamlanan</option></select></div><span className="filter-count" role="status" aria-live="polite">{trips.length} geziden {filteredTrips.length} sonuç</span>{(query||statusFilter!=='all')&&<button className="clear-filters" onClick={()=>{setQuery('');setStatusFilter('all')}}>Filtreleri temizle</button>}</div>}
+        {trips.length?(filteredTrips.length?<div className="passes">{filteredTrips.map(t=><Pass key={t.id} t={t} on={t.id===selected} select={()=>pick(t)} edit={()=>openModal(t)} remove={()=>deleteTrip(t)}/>)}</div>:<div className="empty search-empty"><span className="empty-compass" aria-hidden="true">⌕</span><h3>Aramana uygun gezi bulunamadı</h3><p>Başka bir gezi adı veya şehir deneyebilir, durum filtresini değiştirebilirsin.</p><button className="btn dark" onClick={()=>{setQuery('');setStatusFilter('all')}}>Tüm gezileri göster</button></div>)
         :<div className="empty"><span className="empty-compass" aria-hidden="true">↗</span><h3>İlk yolculuğunu planlayalım</h3><p>Şehrini ve tarihlerini seç, keşfetmek istediğin yerleri günlere ekle.</p><button className="btn dark" onClick={()=>openModal()}>İlk gezimi oluştur</button></div>}
       </section>
-      {trip&&<section id="plan" className="plan" aria-label="Gezi planı">
+      {trip&&filteredTrips.some(t=>t.id===trip.id)&&<section id="plan" className="plan" aria-label="Gezi planı">
         <div className="banner"><Scene kind={sceneFor(trip.city)} uid={'b'+trip.id}/><div><p>{trip.city}</p><h2>{trip.name}</h2><span>{pretty(trip.start)} – {pretty(trip.end)} · {days.length} gün · {trip.stops.length} durak</span></div></div>
         <div className="workspace">
           <div className="itinerary">

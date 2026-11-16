@@ -1,13 +1,13 @@
 # Devam eden geliştirmeler
 
-Bu dört görevin iş kuralları ve ilk otomatik testleri hazırlanmıştır. Henüz kullanıcı arayüzüne bağlanmamıştır; özellikler bitmiş değildir. Mevcut uygulama arayüzü aynı kalır.
+Arama/filtreleme arayüzü tamamlanmıştır; kartın kapatılması kullanıcı kabul kontrollerinden sonra yapılır. Bütçe, PDF ve genel not görevlerinin iş kuralları ve ilk testleri hazırdır; bu üç özellik henüz arayüze bağlı değildir.
 
 | Görev | Başlanan çalışma | Kalan işler |
 | --- | --- | --- |
 | Gezi bütçesi hesaplama | `src/features/budget.js`: gider doğrulama ve kuruş hassasiyetinde toplam; testleri. | Form, gezi başına kayıt, arayüz testleri. |
-| Gezilerde arama ve filtreleme | `src/features/search.js`: Türkçe arama ve tarih bazlı durum filtresi; testleri. | Arama kutusu, filtre seçenekleri, boş sonuç görünümü. |
+| Gezilerde arama ve filtreleme | `src/features/search.js`: Türkçe arama ve tarih bazlı durum filtresi; testleri. | Arayüz tamamlandı; kullanıcı kabul kontrolleri ve commit bağlantısının karta eklenmesi. |
 | Gezi planını PDF indirme | `src/features/pdf-plan.js`: günlere ayrılmış ve saat sıralı çıktı verisi; testi. | PDF üretimi, Türkçe font, sayfalama, indirme düğmesi. |
 | Geziye genel not ekleme | `src/features/notes.js`: ayrı genel not alanı, sınır doğrulaması ve temizleme; testleri. | Not formu, localStorage bağlantısı, kullanıcı denemeleri. |
 
 ## Panoda güncelleme
-Bu dosyalar gerçek commitlerle gönderildikten sonra dört kart Devam Ediyor sütununa taşınabilir. Kartlara ilgili commit bağlantısını ve yukarıdaki başlanan çalışma bilgisini ekleyin. Mevcut kartlardaki form/indirme/kalıcı kayıt kriterleri henüz karşılanmadığından işaretlenmemelidir. Testler `npm test` ile çalıştırılır.
+Arama/filtreleme değişiklikleri ayrı commit olarak gönderilir ve bağlantısı ilgili karta eklenir. README'deki 10. deneme adımları doğrulandıktan sonra kriterler işaretlenip kart Tamamlandı'ya taşınır. Bütçe, PDF ve genel not kartları Devam Ediyor durumunda kalır. Testler `npm test` ile çalıştırılır.

@@ -65,13 +65,18 @@ Uygulamayı tarayıcının geliştirici araçlarında mobil ekran görünümüyl
 
 **Beklenen:** Sayfa yatay taşmadan kullanılabilir; kartlar ve formlar ekran genişliğine uyum sağlar. Çok sayıda gün olduğunda gün seçenekleri kendi alanında yatay kaydırılabilir.
 
+### 10. Gezilerde arama ve filtreleme
+**Gezilerim** bölümünde gezi adı veya şehir yazın; örneğin `şanlıurfa` araması Şanlıurfa gezilerini bulmalıdır. **Gezi durumu** alanından Yaklaşan, Devam eden veya Tamamlanan seçin. Durumlar gezinin tarihleriyle bugünün tarihine göre belirlenir; başlangıç ve bitiş günü devam eden kapsamındadır.
+
+**Beklenen:** Arama büyük/küçük harften bağımsızdır ve durum filtresiyle birlikte çalışır. Eşleşme yoksa açıklayıcı mesaj gösterilir. **Filtreleri temizle** veya **Tüm gezileri göster** ile tüm kartlar geri gelir. Filtreye uymayan seçili gezinin detay planı da gizlenir; geziler silinmez.
+
 ## Kontroller
 Otomatik kontroller için `npm test`, üretim derlemesi için `npm run build` çalıştırın. Derleme `dist` klasörüne yazılır; `npm run preview` ile yerel olarak incelenebilir. Otomatik kontroller iş kurallarını kapsar; yukarıdaki arayüz senaryoları ayrıca elle doğrulanmalıdır.
 
 ## Gelecek geliştirmeler
-Bütçe hesaplama, PDF indirme, arama/filtreleme, harita, yedekleme, durak kategorileri ve ziyaret edildi işaretleme sonraki geliştirmeler olarak planlanmıştır; mevcut sürümde bulunmaz.
+Bütçe hesaplama, PDF indirme, harita, yedekleme, durak kategorileri ve ziyaret edildi işaretleme sonraki geliştirmeler olarak planlanmıştır; mevcut sürümde bulunmaz.
 
 **Geliştirici:** Berat Kolsuzoğlu · Güncel Yazılım Geliştirme Süreçleri ve DevOps bireysel projesi.
 
 ## Devam eden çalışmalar
-Bütçe, arama/filtreleme, PDF ve genel gezi notu için ilk iş kuralları ile otomatik testler hazırlanmıştır. Bu modüller henüz arayüze bağlı değildir. Başlanan ve kalan işler: [geliştirme durumu](docs/devam-eden-calismalar.md).
+Arama/filtreleme özelliği arayüze bağlanmıştır. Bütçe, PDF ve genel gezi notu için ilk iş kuralları ile otomatik testler hazırlanmıştır; bu üç modül henüz arayüze bağlı değildir. Başlanan ve kalan işler: [geliştirme durumu](docs/devam-eden-calismalar.md).
